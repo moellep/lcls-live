@@ -501,6 +501,9 @@ SC_INJ_SOLENOID_FACTOR = {
     'SOL1B': 0.1/0.08623995 , # kG-m to T:  \int B^2 dL = B_max^2 * 0.1/0.08623995 m
     'SOL2B': 0.1/0.08623995 , # Same as SOL1B
 }
+CU_INJ_SOLENOID_FACTOR = {
+    'SOL1': 0.51427242,
+}
     
     
 def solenoid_pvinfo(tao, ele, model):
@@ -514,6 +517,8 @@ def solenoid_pvinfo(tao, ele, model):
     # Get field integral conversion factor
     if model == 'sc_inj':
         factor = SC_INJ_SOLENOID_FACTOR[ele]
+    elif model == 'cu_spec' and ele in CU_INJ_SOLENOID_FACTOR:
+        factor = CU_INJ_SOLENOID_FACTOR[ele]
     else:
         # hard-edge
         L = attrs['L']
